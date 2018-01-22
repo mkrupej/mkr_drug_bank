@@ -1,27 +1,60 @@
-class Drug:
-    def __init__(self, id_primary, id, name, description,
-                 cas_number, unii, avg_mass, monoisotopic_mass, state, groups, articles):
-        self.id_primary = id_primary
-        self.id = id
-        self.name = name
-        self.description = description
-        self.cas_number = cas_number
-        self.unii = unii
-        self.avg_mass = avg_mass
-        self.monoisotopic_mass = monoisotopic_mass
-        self.state = state
-        self.groups = groups
-        self.articles = articles
-        self.synthesis_reference = synthesis_reference
-        self.indication = indication
-        self.pharmacodynamics = pharmacodynamics
-        self.mechanism_of_action = mechanism_of_action
-        self.toxicity = toxicity
-        self.metabolism = metabolism
-        self.absorption = absorption
-        self.half_life = half_life
-        self.protein_binding = protein_binding
-        self.route_of_elimination = route_of_elimination
+import xml.sax
 
-    def __repr__(self):
-        return "{}".format(self.id_primary)
+class Drug(xml.sax.ContentHandler ):
+    def __init__(self):
+        self.CurrentData = ""
+        self.type = ""
+        self.created = ""
+        self.updated = ""
+        self.id_primary = ""
+        self.id = ""
+        self.name = ""
+        self.description = ""
+        self.cas_number = ""
+        self.unii = ""
+        self.avg_mass = ""
+        self.monoisotopic_mass = ""
+        self.state = ""
+        self.groups = ""
+        self.articles = ""
+        self.synthesis_reference = ""
+        self.indication = ""
+        self.pharmacodynamics = ""
+        self.mechanism_of_action = ""
+        self.toxicity = ""
+        self.metabolism = ""
+        self.absorption = ""
+        self.half_life = ""
+        self.protein_binding = ""
+        self.route_of_elimination = ""
+
+    def startElement(self, tag, attributes):
+        self.CurrentData = tag
+        # print(tag)
+        # print("START#" * 10)
+        if tag == 'drug':
+            print("DRUG")
+            for (k,v) in attributes.items():
+                print (k + " " + v)
+
+    def endElement(self, tag):
+        if self.CurrentData == "name":
+            print("name:", self.name)
+        elif self.CurrentData == "description":
+            print("description", self.description)
+        elif self.CurrentData == "cas_number":
+            print("cas_number", self.description)
+        else:
+            print("nic")
+        # print("END#" * 10)
+
+    def characters(self, content):
+        if self.CurrentData == "name":
+            self.name = content
+        elif self.CurrentData == "description":
+            self.name = content
+        elif self.CurrentData == "cas_number":
+            self.name = content
+
+    # def __repr__(self):
+    #     return "{}".format(self.id_primary)
