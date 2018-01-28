@@ -7,6 +7,6 @@ setup(
     author_email = "michal.krupej@student.uj.edu.pl",
     description = ("Search engine for local copy of DrugBankDB"),
     keywords = "drugBank drug db disease",
-    #packages=['an_example_pypi_project', 'tests'],
+    packages=['Parser', 'Loader', 'DrugBankModel'],
     #long_description=read('README'),
 )
