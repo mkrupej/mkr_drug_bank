@@ -1,6 +1,9 @@
+import json
+
 import loader.DatabaseLoader
 from lxml import etree
 from lxml.etree import tostring
+import xmltodict
 
 class DrugParser:
 
@@ -18,4 +21,9 @@ class DrugParser:
 a = DrugParser()
 
 
-print(etree.tostring(a.search_for_drug_by_name(name="Rasburicase")))
+xml = (etree.tostring(a.search_for_drug_by_name(name="Rasburicase")))
+
+xdict = xmltodict.parse(xml)
+
+print(xdict['drug'])
+print(xdict['drug']['products'])
