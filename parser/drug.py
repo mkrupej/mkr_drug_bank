@@ -1,5 +1,3 @@
-import json
-
 import loader.DatabaseLoader
 from lxml import etree
 from lxml.etree import tostring
@@ -9,21 +7,33 @@ class DrugParser:
 
     VALUE_XPATH = "/drugbank/drug[name ='{}']"
 
+    name = ""
+    result_dict = ""
 
-    def search_for_drug_by_name(self, name):
+    def __init__(self, name):
+        self.name = name
+        self.search()
+
+    def get_elem_from_name(self, name):
         parsed_db = loader.DatabaseLoader.get_db()
         drug_xpath = etree.XPath(self.VALUE_XPATH.format(name))
+        result_elem = drug_xpath(parsed_db)[0]
+        return result_elem
 
-        result = drug_xpath(parsed_db)
-        return drug_xpath(parsed_db)[0]
+    def get_xml_from_elem(self, elem):
+        return etree.tostring(elem)
+
+    def get_dict_from_xml(self, xml):
+        self.result_dict = xmltodict.parse(xml)
+        pass
+
+    def search(self):
+        elem = self.get_elem_from_name(self.name)
+        xml = self.get_xml_from_elem(elem)
+        self.get_dict_from_xml(xml)
+        return self.result_dict
 
 
-a = DrugParser()
+a = DrugParser("Rasburicase")
 
-
-xml = (etree.tostring(a.search_for_drug_by_name(name="Rasburicase")))
-
-xdict = xmltodict.parse(xml)
-
-print(xdict['drug'])
-print(xdict['drug']['products'])
+print(a.result_dict)
