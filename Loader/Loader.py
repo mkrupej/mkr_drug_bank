@@ -14,9 +14,10 @@ def load(filename, path):
             elem_stack.append(elem)
         elif event == 'end':
             if tag_stack == path_parts:
+            #    print("WOLAJA")
                 yield elem
-                elem_stack.remove(elem)
-                del elem, event
+                elem_stack.pop()
+                #del elem, event
             try:
                 tag_stack.pop()
                 elem_stack.pop()

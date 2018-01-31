@@ -4,10 +4,8 @@ import xmltodict
 
 class DrugParser:
 
-    VALUE_XPATH = "//drug[name ='{}']"
-
+    VALUE_XPATH = "/drug[name ='{}']"
     name = ""
-    result_dict = ""
 
     def __init__(self, name, data):
         self.name = name
@@ -20,21 +18,22 @@ class DrugParser:
         if not (drug_xpath(data)):
             pass
         else:
-            print("XXXXXX")
             return drug_xpath(data)[0]
 
     def get_xml_from_elem(self, elem):
         return etree.tostring(elem)
 
     def get_dict_from_xml(self, xml):
-        print("REZULTADO")
-        print(xml)
+        #print(xml)
         self.result_dict = xmltodict.parse(xml, process_namespaces=True)
         pass
 
     def search(self, data):
         i = 0
-        for generated_elem in data:
+        result_dict = ''
+        lista = list(data)
+        print(type(lista))
+        for generated_elem in lista:
             # print(type(data))
             # print(type(generated_elem))
             # print(etree.tostring(generated_elem))
@@ -42,11 +41,21 @@ class DrugParser:
             #print("iiii")
             i += 1
             print(i)
-            elem = self.get_elem_from_name(self.name, generated_elem)
-            print("ELEM", elem)
-            if elem is not None:
+            print("id elem", generated_elem)
+            generated_elem_xml = self.get_xml_from_elem(generated_elem)
+            print("GENERATED XML",generated_elem_xml)
+            #elem = self.get_elem_from_name(self.name, generated_elem)
+            drug_xpath = etree.XPath(("//drug[name ='{}']").format(self.name))
+            print("XPATHED ELEM", drug_xpath(generated_elem))
+            if drug_xpath(generated_elem):
+                elem = drug_xpath(generated_elem)[0]
+
+            #if elem is not None:
+                print(type(elem))
+                print("ELEM", elem)
                 xml = self.get_xml_from_elem(elem)
                 self.get_dict_from_xml(xml)
-        return self.result_dict
-
+                print("znalazlem", xml)
+        return result_dict
+        #return self.result_dict
 
