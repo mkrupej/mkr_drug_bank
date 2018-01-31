@@ -2,60 +2,60 @@ import Loader.Loader
 from lxml import etree
 import xmltodict
 
-class DrugParser:
+class Drug:
 
-    VALUE_XPATH = "/drug[name ='{}']"
-    name = ""
+    result_dicts_list = []
 
-    def __init__(self, name, data):
-        self.name = name
-        self.search(data)
-
-    def get_elem_from_name(self, name, data):
-        drug_xpath = etree.XPath(self.VALUE_XPATH.format(name))
-        print(self.VALUE_XPATH.format(name))
-        print(etree.tostring(data))
-        if not (drug_xpath(data)):
-            pass
-        else:
-            return drug_xpath(data)[0]
+    def __init__(self, data, search_dict):
+        self.result_dicts_list = self.search(data, search_dict)
 
     def get_xml_from_elem(self, elem):
         return etree.tostring(elem)
 
     def get_dict_from_xml(self, xml):
         #print(xml)
-        self.result_dict = xmltodict.parse(xml, process_namespaces=True)
-        pass
+        return xmltodict.parse(xml, process_namespaces=True)
 
-    def search(self, data):
-        i = 0
-        result_dict = ''
-        lista = list(data)
-        print(type(lista))
-        for generated_elem in lista:
-            # print(type(data))
-            # print(type(generated_elem))
-            # print(etree.tostring(generated_elem))
+    def get_dict_list_from_elem_list(self, list_results):
+
+        list_of_elems_dicts = []
+        for elem in list_results:
+            xml = self.get_xml_from_elem(elem)
+            dict = self.get_dict_from_xml(xml)
+            list_of_elems_dicts.append(dict)
+
+        return list_of_elems_dicts
+
+    @staticmethod
+    def search_elem(generated_elem, search_dict):
+
+        match = False
+
+        for key in search_dict:
+            result = generated_elem.findall(key)
+            if result:
+                specific_node = result[0].text
+                # print(specific_node)
+                if specific_node and (search_dict[key] in specific_node):
+                    match = True
+                else:
+                    match = False
+                    break
+            else:
+                match = False
+                break
             #print(generated_elem)
-            #print("iiii")
-            i += 1
-            print(i)
-            print("id elem", generated_elem)
-            generated_elem_xml = self.get_xml_from_elem(generated_elem)
-            print("GENERATED XML",generated_elem_xml)
-            #elem = self.get_elem_from_name(self.name, generated_elem)
-            drug_xpath = etree.XPath(("//drug[name ='{}']").format(self.name))
-            print("XPATHED ELEM", drug_xpath(generated_elem))
-            if drug_xpath(generated_elem):
-                elem = drug_xpath(generated_elem)[0]
+        return match
 
-            #if elem is not None:
-                print(type(elem))
-                print("ELEM", elem)
-                xml = self.get_xml_from_elem(elem)
-                self.get_dict_from_xml(xml)
-                print("znalazlem", xml)
-        return result_dict
-        #return self.result_dict
+    def search(self, data, search_dict):
+
+        list_of_elems_results = []
+
+        for generated_elem in data:
+
+            if Drug.search_elem(generated_elem, search_dict):
+                list_of_elems_results.append(generated_elem)
+
+        list_of_dict_results = self.get_dict_list_from_elem_list(list_of_elems_results)
+        return list_of_dict_results
 

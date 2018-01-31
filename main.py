@@ -4,26 +4,25 @@ import Loader
 import locale
 from lxml import etree
 
-
-def get_xml_from_elem(elem):
+def get_xml_from_elem2(elem):
     return etree.tostring(elem)
 
-def search(data, name):
-    i = 0
+def search2(data, search_dict):
     result_dict = ''
-    #lista = list(data)
-    #print("LISTA", lista)
-#    tree = etree.parse()
+
     for generated_elem in data:
-        i += 1
-        #tree = etree.Element("root")
-        #print(etree.tostring(tree.child))
-        hoi_parser = etree.XMLParser()
-        #print("root",tree)
-        result = generated_elem.findall('name')
-        for e in result:
-            if e.text == name:
-                print("GOOOOOOOOOOD")
+
+        for key in search_dict:
+            result = generated_elem.findall(key)
+            if result:
+                specific_node = result[0].text
+            #print(specific_node)
+                if specific_node and (search_dict[key] in specific_node):
+                    print("GOOOOOOOOOOD")
+                else:
+                    break
+            else:
+                break
 
         if result:
             elem = result[0]
@@ -37,16 +36,14 @@ def search(data, name):
     return result_dict
     # return self.result_dict
 
-
-#locale.getdefaultlocale = (lambda *args: ['en_US', 'utf8'])
-#locale.getlocale = (lambda *arge2s: ['en_US', 'utf8'])
-#parsed_db = Loader.DatabaseLoader.get_db()
-filename = './Source/minidrug2.xml'
-#   filename = './Source/full database.xml'
+#filename = './Source/minidrug2.xml'
+filename = './Source/full database.xml'
 path = 'drug'
 incremental_loader = Loader.Loader.load(filename, path)
-search(incremental_loader, "EEEE")
+search_dict = {"state": 'liquid'}
 
-#a = Parser.Drug.DrugParser('AAAA', incremental_loader)
 
-#print(a.result_dict)
+#search2(incremental_loader, search_dict)
+
+a = Parser.Drug.Drug(incremental_loader, search_dict)
+print(a.result_dicts_list)

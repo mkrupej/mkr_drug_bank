@@ -17,7 +17,7 @@ def load(filename, path):
             #    print("WOLAJA")
                 yield elem
                 elem_stack.pop()
-                #del elem, event
+                del elem, event
             try:
                 tag_stack.pop()
                 elem_stack.pop()
