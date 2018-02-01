@@ -1,6 +1,6 @@
-import Loader.Loader
 from lxml import etree
 import xmltodict
+
 
 class Drug:
 
@@ -9,22 +9,22 @@ class Drug:
     def __init__(self, data, search_dict):
         self.result_dicts_list = self.search(data, search_dict)
 
-    def get_xml_from_elem(self, elem):
+    @staticmethod
+    def get_xml_from_elem(elem):
         return etree.tostring(elem)
 
-    def get_dict_from_xml(self, xml):
-        #print(xml)
+    @staticmethod
+    def get_dict_from_xml(xml):
         return xmltodict.parse(xml, process_namespaces=True)
 
     def get_dict_list_from_elem_list(self, list_results):
 
-        list_of_elems_dicts = []
+        list_of_elem_dicts = []
         for elem in list_results:
             xml = self.get_xml_from_elem(elem)
-            dict = self.get_dict_from_xml(xml)
-            list_of_elems_dicts.append(dict)
-
-        return list_of_elems_dicts
+            result_dict = self.get_dict_from_xml(xml)
+            list_of_elem_dicts.append(result_dict)
+        return list_of_elem_dicts
 
     @staticmethod
     def search_elem(generated_elem, search_dict):
@@ -44,18 +44,16 @@ class Drug:
             else:
                 match = False
                 break
-            #print(generated_elem)
         return match
 
     def search(self, data, search_dict):
 
-        list_of_elems_results = []
+        list_of_elem_results = []
 
         for generated_elem in data:
 
             if Drug.search_elem(generated_elem, search_dict):
-                list_of_elems_results.append(generated_elem)
+                list_of_elem_results.append(generated_elem)
 
-        list_of_dict_results = self.get_dict_list_from_elem_list(list_of_elems_results)
+        list_of_dict_results = self.get_dict_list_from_elem_list(list_of_elem_results)
         return list_of_dict_results
-
