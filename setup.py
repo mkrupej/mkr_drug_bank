@@ -8,6 +8,6 @@ setup(
     description="Search engine for local copy of DrugBankDB",
     keywords="drugBank drug db disease",
     packages=['Parser', 'Loader', 'Model'],
-    requires=['xmltodict', 'lxml']
+    requires=['xmltodict', 'lxml', 'nose']
     #long_description=read('README'),
 )

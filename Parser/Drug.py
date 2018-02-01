@@ -55,5 +55,12 @@ class Drug:
             if Drug.search_elem(generated_elem, search_dict):
                 list_of_elem_results.append(generated_elem)
 
+
         list_of_dict_results = self.get_dict_list_from_elem_list(list_of_elem_results)
+        try:
+            if list_of_dict_results == []:
+                raise ValueError
+        except ValueError:
+            print("Drug was not found.")
+
         return list_of_dict_results
