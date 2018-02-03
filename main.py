@@ -1,6 +1,6 @@
 import collections
 
-import Parser.Drug
+import Parser.Search
 import Parser.AdvancedSearch
 import Loader.Loader
 import Model.Drug

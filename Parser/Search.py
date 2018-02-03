@@ -2,7 +2,7 @@ from lxml import etree
 import xmltodict
 
 
-class Drug:
+class Search:
 
     result_dicts_list = []
 

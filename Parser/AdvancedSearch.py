@@ -1,6 +1,6 @@
 import enum
 
-import Parser.Drug
+import Parser.Search
 
 
 class SupportedFile(enum.Enum):
@@ -9,7 +9,7 @@ class SupportedFile(enum.Enum):
     PRODUCT = "products", "product"
 
 
-class AdvancedSearch(Parser.Drug.Drug):
+class AdvancedSearch(Parser.Search.Search):
 
     def search_elem(self, generated_elem, search_dict, search_type=None):
         match = False
