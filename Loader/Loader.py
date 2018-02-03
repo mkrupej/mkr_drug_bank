@@ -4,7 +4,7 @@ from lxml.etree import iterparse
 def load(filename, path):
     path_parts = path.split('/')
     doc = iterparse(filename, ('start', 'end'))
-    next(doc) # skip root elem
+    next(doc)  # skip root elem
 
     tag_stack = []
     elem_stack = []
@@ -14,7 +14,7 @@ def load(filename, path):
             elem_stack.append(elem)
         elif event == 'end':
             if tag_stack == path_parts:
-            #    print("WOLAJA")
+                #    print("WOLAJA")
                 del event
                 yield elem
                 elem_stack.pop()

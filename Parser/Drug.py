@@ -6,8 +6,8 @@ class Drug:
 
     result_dicts_list = []
 
-    def __init__(self, data, search_dict):
-        self.search(data, search_dict)
+    def __init__(self, data, search_dict, search_type=None):
+        self.search(data, search_dict, search_type=search_type)
 
     @staticmethod
     def get_xml_from_elem(elem):
@@ -26,8 +26,7 @@ class Drug:
             list_of_elem_dicts.append(result_dict)
         return list_of_elem_dicts
 
-    @staticmethod
-    def search_elem(generated_elem, search_dict):
+    def search_elem(self, generated_elem, search_dict, search_type=None):
         match = False
 
         for key in search_dict:
@@ -45,19 +44,18 @@ class Drug:
                 break
         return match
 
-    def search(self, data, search_dict):
+    def search(self, data, search_dict, search_type=None):
 
         list_of_elem_results = []
 
         for generated_elem in data:
 
-            if self.search_elem(generated_elem, search_dict):
+            if self.search_elem(generated_elem, search_dict, search_type):
                 list_of_elem_results.append(generated_elem)
-
 
         self.result_dicts_list = self.get_dict_list_from_elem_list(list_of_elem_results)
         try:
-            if self.result_dicts_list == []:
+            if not self.result_dicts_list:
                 raise ValueError
         except ValueError:
             print("Drug was not found.")

@@ -1,18 +1,18 @@
 import collections
 
 import Parser.Drug
-import Parser.Target
+import Parser.AdvancedSearch
 import Loader.Loader
 import Model.Drug
 
 #filename = './Source/minidrug2.xml'
-filename = './Source/full database.xml'
-#filename = './Source/single_drug.xml'
+#filename = './Source/full database.xml'
+filename = './Source/single_drug.xml'
 
 path = 'drug'
 incremental_loader = Loader.Loader.load(filename, path)
-search_dict = {"name": 'Histamine N-methyltransferase'}
-#
+search_dict = {"name": 'Action Pathway'}
+
 #
 # a = Parser.Drug.Drug(incremental_loader, search_dict)
 #
@@ -22,8 +22,8 @@ search_dict = {"name": 'Histamine N-methyltransferase'}
 #     print(drug.general_represent)
 #     print(drug)
 
-b = Parser.Target.Target(incremental_loader, search_dict)
-
+b = Parser.AdvancedSearch.AdvancedSearch(incremental_loader, search_dict, search_type=Parser.AdvancedSearch.SupportedFile.PATHWAY)
+#
 print(b.result_dicts_list)
 
 for elem in b.result_dicts_list:
