@@ -1,18 +1,17 @@
 import collections
-import xml.sax
-import Parser
+
 
 class Drug:
 
-    elem_dict = dict()
+    drug_dict = dict()
     general_represent = ''
 
-    def __init__(self, dict):
-        self.elem_dict = dict
+    def __init__(self, drug_dict):
+        self.drug_dict = drug_dict
         self.general_overview()
 
     def general_overview(self):
-        for key, value in self.elem_dict["drug"].items():
+        for key, value in self.drug_dict["drug"].items():
             if key in ["name", "drugbank-id", "description"]:
                 self.general_represent += "{}: {}\n".format(key.upper(), value)
         return
@@ -21,13 +20,13 @@ class Drug:
 
         detailed_represent = 'IDENTIFICATION\n'+self.general_represent
 
-        for key, value in self.elem_dict["drug"].items():
+        for key, value in self.drug_dict["drug"].items():
             if key not in ["name", "drugbank-id", "description"]:
                 detailed_represent += "\n{} : ".format(key.upper())
                 if type(value) is collections.OrderedDict:
-                    detailed_represent += Drug.extract_from_dict(value)
+                    detailed_represent += "\t{}".format(Drug.extract_from_dict(value))
                 else:
-                    detailed_represent += "{}\n".format(value)
+                    detailed_represent += "\t{}".format(value)
         return detailed_represent.replace("\n\n", "\n")
 
     @staticmethod
@@ -35,9 +34,9 @@ class Drug:
         detailed_represent = "\t"
         for elem in property_list:
             if type(elem) is collections.OrderedDict:
-                detailed_represent += Drug.extract_from_dict(elem)
+                detailed_represent += "\t{}".format(Drug.extract_from_dict(elem))
             elif type(elem) is list:
-                detailed_represent += elem
+                detailed_represent += "\t{}".format(elem)
         return detailed_represent
 
     @staticmethod
@@ -45,16 +44,13 @@ class Drug:
         detailed_represent = "\n\t"
 
         for elem in property_dict:
-           # print(type(property_dict[elem]), property_dict[elem])
+            # print(type(property_dict[elem]), property_dict[elem])
             detailed_represent += "{} : ".format(elem.upper())
             if type(property_dict[elem]) is collections.OrderedDict:
-                detailed_represent += Drug.extract_from_dict(property_dict[elem])
+                detailed_represent += "\t{}".format(Drug.extract_from_dict(property_dict[elem]))
             elif type(property_dict[elem]) is list:
-                detailed_represent += Drug.extract_from_list(property_dict[elem])
+                detailed_represent += "\t{}".format(Drug.extract_from_list(property_dict[elem]))
             else:
                 detailed_represent += "{}\n\t".format(property_dict[elem])
 
         return detailed_represent
-
-
-
