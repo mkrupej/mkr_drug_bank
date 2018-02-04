@@ -6,9 +6,9 @@ import main
 
 class FindDrugTestCase(unittest.TestCase):
     """
-    
+    Functional TestCases for Simple search using different set of properties.
+    Search through indications included.
     """
-
 
     def test_find_drug_by_empy_dict_error_case(self):
         search_dict = {}

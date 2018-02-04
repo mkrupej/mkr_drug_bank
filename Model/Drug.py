@@ -1,23 +1,26 @@
+"""
+Module is used to create Drug from Dict
+"""
+
 import collections
 
 
 class Drug:
 
-    drug_dict = dict()
-    general_represent = ''
+    drug_dict = dict()  # ordered dict containing properties of drug
+    general_represent = ''  # string containing drug [name, id and description]
 
     def __init__(self, drug_dict):
         """
-
-        :param drug_dict:
+        Initialize drug item. Set general properties and dictionary.
+        :param drug_dict: dict returned from Drug parsing containing single drug element
         """
         self.drug_dict = drug_dict
         self.general_overview()
 
     def general_overview(self):
         """
-
-        :return:
+        Extracting main properties of the drug [name, id and description] from drug_dict
         """
         for key, value in self.drug_dict["drug"].items():
             if key in ["name", "drugbank-id", "description"]:
@@ -26,8 +29,9 @@ class Drug:
 
     def __repr__(self):
         """
-
-        :return:
+        Preparing string which contains drug with its every property in readable form
+        As this function overwrites standard __repr__ it can be called as print(drug)
+        :return: string contains detailed represent of drug
         """
 
         detailed_represent = 'IDENTIFICATION\n'+self.general_represent
@@ -44,9 +48,9 @@ class Drug:
     @staticmethod
     def extract_from_list(property_list):
         """
-
-        :param property_list:
-        :return:
+        Extracting drug properties defined within list into string.
+        :param property_list: list of properties
+        :return: string containing list of properties
         """
         detailed_represent = "\t"
         for elem in property_list:
@@ -59,9 +63,9 @@ class Drug:
     @staticmethod
     def extract_from_dict(property_dict):
         """
-
-        :param property_dict:
-        :return:
+        Extracts properties defined within dict into string.
+        :param property_dict: drug dict
+        :return: string containing list of properties
         """
         detailed_represent = "\n\t"
 

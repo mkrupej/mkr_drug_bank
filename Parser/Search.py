@@ -1,46 +1,49 @@
+"""
+Module providing search functions
+"""
 from lxml import etree
 import xmltodict
 
 
 class Search:
     """
-
+    Class providing search functions.
     """
 
-    result_dicts_list = []
+    result_dicts_list = []  # contains result as a list of drug elements
 
     def __init__(self, data, search_dict, search_type=None):
         """
-
-        :param data:
-        :param search_dict:
-        :param search_type:
+        Initialize Search
+        :param data: drug data as generator
+        :param search_dict: expected properties as dict
+        :param search_type: search_type (used in AdvancedSearch)
         """
         self.search(data, search_dict, search_type=search_type)
 
     @staticmethod
     def get_xml_from_elem(elem):
         """
-
-        :param elem:
-        :return:
+        Get XML as string from given ELEM type
+        :param elem: ELEM
+        :return: XML as string
         """
         return etree.tostring(elem)
 
     @staticmethod
     def get_dict_from_xml(xml):
         """
-
-        :param xml:
-        :return:
+        Get OrderedDict element from given XML (string)
+        :param xml: as string
+        :return: Ordered Dict
         """
         return xmltodict.parse(xml, process_namespaces=True)
 
     def get_dict_list_from_elem_list(self, list_results):
         """
-
-        :param list_results:
-        :return:
+        Get List of OrderedDicts from List of Elems
+        :param list_results: List of Elems
+        :return: List of Ordered Dicts
         """
 
         list_of_elem_dicts = []
@@ -52,11 +55,11 @@ class Search:
 
     def search_elem(self, generated_elem, search_dict, search_type=None):
         """
-
-        :param generated_elem:
-        :param search_dict:
-        :param search_type:
-        :return:
+        Search through specific drug to find expected values
+        :param generated_elem: drug as elem
+        :param search_dict: expected properties as dict
+        :param search_type: used in AdvancedSearch
+        :return: boolean value, true if drug matches search_dict
         """
         match = False
 
@@ -75,11 +78,11 @@ class Search:
 
     def search(self, data, search_dict, search_type=None):
         """
-
-        :param data:
-        :param search_dict:
-        :param search_type:
-        :return:
+        Search through generated data to find drugs with expected properties.
+        Saving results as list of orderedDicts into result_dicts_list
+        :param data: DB data as drug generator
+        :param search_dict: expected properties as dict
+        :param search_type: used in AdvancedSearch)
         """
 
         list_of_elem_results = []

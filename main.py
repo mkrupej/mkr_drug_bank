@@ -10,6 +10,8 @@ db_file = 'C:/Users/michal/PycharmProjects/mkr_drug_bank/Source/full database.xm
 
 drug_xml_selector = 'drug'
 incremental_loader = Loader.Loader.load(db_file, drug_xml_selector)
+print(type(incremental_loader))
+print(next(incremental_loader))
 # search_dict = {"name": 'Action Pathway', "category" : "drug_action"}
 
 #

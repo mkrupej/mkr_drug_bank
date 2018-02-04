@@ -6,9 +6,8 @@ import main
 
 class FindTargetedDrugTestCase(unittest.TestCase):
     """
-
+    Functional TestCases for Target search using different set of properties.
     """
-
 
     def test_find_targeted_drug_by_empy_dict_error_case(self):
         search_dict = {}
@@ -24,7 +23,7 @@ class FindTargetedDrugTestCase(unittest.TestCase):
         for elem in a.result_dicts_list:
             drug = Model.Drug.Drug(elem)
             print(drug.general_represent)
-            if ((name["name"] in drug.general_represent)):
+            if (name["name"] in drug.general_represent):
                 match = True
         self.assertTrue(match)
 
@@ -42,7 +41,7 @@ class FindTargetedDrugTestCase(unittest.TestCase):
 
 
     def test_find_drug_by_multiple_pathway_properties_(self):
-        search_dict = {"organism": 'Human', "id" : "BE0000048"}
+        search_dict = {"organism": 'Human', "id": "BE0000048"}
         a = Parser.AdvancedSearch.AdvancedSearch(main.incremental_loader, search_dict, search_type=Parser.AdvancedSearch.SupportedFile.TARGET)
         for elem in a.result_dicts_list:
             drug = Model.Drug.Drug(elem)
