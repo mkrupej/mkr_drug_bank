@@ -2,6 +2,12 @@ from lxml.etree import iterparse
 
 
 def load(filename, path):
+    """
+
+    :param filename:
+    :param path:
+    :return:
+    """
     path_parts = path.split('/')
     doc = iterparse(filename, ('start', 'end'))
     next(doc)  # skip root elem

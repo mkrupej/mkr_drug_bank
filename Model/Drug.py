@@ -7,16 +7,28 @@ class Drug:
     general_represent = ''
 
     def __init__(self, drug_dict):
+        """
+
+        :param drug_dict:
+        """
         self.drug_dict = drug_dict
         self.general_overview()
 
     def general_overview(self):
+        """
+
+        :return:
+        """
         for key, value in self.drug_dict["drug"].items():
             if key in ["name", "drugbank-id", "description"]:
                 self.general_represent += "{}: {}\n".format(key.upper(), value)
         return
 
     def __repr__(self):
+        """
+
+        :return:
+        """
 
         detailed_represent = 'IDENTIFICATION\n'+self.general_represent
 
@@ -31,6 +43,11 @@ class Drug:
 
     @staticmethod
     def extract_from_list(property_list):
+        """
+
+        :param property_list:
+        :return:
+        """
         detailed_represent = "\t"
         for elem in property_list:
             if type(elem) is collections.OrderedDict:
@@ -41,6 +58,11 @@ class Drug:
 
     @staticmethod
     def extract_from_dict(property_dict):
+        """
+
+        :param property_dict:
+        :return:
+        """
         detailed_represent = "\n\t"
 
         for elem in property_dict:
