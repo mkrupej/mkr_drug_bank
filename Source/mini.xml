@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<drugbank>
+	<drug>
+		<name>AAAA</name>
+		<description>AAAA humaes.</description>
+		<cas-number>205923-56-4</cas-number>
+		<unii>PQX0D9J21J</unii>
+	</drug>
+		<drug>
+		<name>BBBB</name>
+		<description>BBBB chumaes.</description>
+		<cas-number>205923-56-4</cas-number>
+		<unii>PQX0D9J21J</unii>
+	</drug>
+	<drug>
+		<name>CCCC</name>
+		<description>CCCC humaes.</description>
+		<cas-number>205923-56-4</cas-number>
+		<unii>PQX0D8J21J</unii>
+	</drug>
+		<drug>
+		<name>DDDD</name>
+		<description>DDDD humaes.</description>
+		<cas-number>205923-56-4</cas-number>
+		<unii>PQX0D8J21J</unii>
+	</drug>
+	<drug>
+		<name>EEEE</name>
+		<description>EEEE humaes.</description>
+		<cas-number>205923-56-4</cas-number>
+		<unii>PQX0D8J21J</unii>
+	</drug>
+</drugbank>
