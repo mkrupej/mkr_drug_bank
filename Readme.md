@@ -6,7 +6,7 @@ Parametry wyszukiwania wzorowane zostay na wyszukiwarce on-line.
 
 Wyszukiwarka umozliwia znajdowanie lekow po wybranych wlasciwosciach danego leku, jak rowniez pozwala na znalezienie leku powiazanego z okreslonym TARGET lub PATHWAY.
 
-Instrukcja uzycia
+# Instrukcja uzycia
 
 1. Ustaw bezwzgledna sciezke do bazy danych w zmiennej db_file w main
 2. Ustaw kryteria wyszukiwania w zmiennej search_dict w formie {"wlasnosc": "wartosc", ...}
@@ -37,7 +37,9 @@ for elem in a.result_dicts_list:
     print(drug) # wypisywanie wszystkich wlasnosci leku
 ``` 
 
-Przyklady uzycia zostaly zamieszczone w katalogu Usage_Examples
+# Use cases
+
+Przyklady zostaly zamieszczone w katalogu Usage_Examples
 
 ```
 FindLepirudin - znajdz lek o znazwie Lepirudin. Wypisz jego overview i szczegoly

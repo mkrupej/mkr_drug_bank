@@ -11,7 +11,7 @@ incremental_loader = Loader.Loader.load(db_file, drug_xml_selector) #set loader
 search_dict = {"name": 'Action Pathway', "category" : "drug_action"} #set search criteria {"property_name": "value"}
 
 #
-# a = Parser.Drug.Drug(incremental_loader, search_dict)
+# a = Parser.Search.Search(incremental_loader, search_dict)
 #
 # print(a.result_dicts_list)
 # for elem in a.result_dicts_list:
