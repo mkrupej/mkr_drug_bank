@@ -3,16 +3,12 @@ import Loader.Loader
 import Model.Drug
 
 
-#set DB file
-#filename = './Source/minidrug2.xml'
-db_file = 'C:/Users/michal/PycharmProjects/mkr_drug_bank/Source/full database.xml'
-#filename = './Source/single_drug.xml'
+db_file = 'C:/Users/michal/PycharmProjects/mkr_drug_bank/Source/full database.xml' #set absoulte path to DB file
 
 drug_xml_selector = 'drug'
-incremental_loader = Loader.Loader.load(db_file, drug_xml_selector)
-print(type(incremental_loader))
-print(next(incremental_loader))
-# search_dict = {"name": 'Action Pathway', "category" : "drug_action"}
+incremental_loader = Loader.Loader.load(db_file, drug_xml_selector) #set loader
+
+search_dict = {"name": 'Action Pathway', "category" : "drug_action"} #set search criteria {"property_name": "value"}
 
 #
 # a = Parser.Drug.Drug(incremental_loader, search_dict)
