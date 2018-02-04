@@ -1,17 +1,16 @@
-import collections
-
-import Parser.Search
 import Parser.AdvancedSearch
 import Loader.Loader
 import Model.Drug
 
-#filename = './Source/minidrug2.xml'
-#filename = './Source/full database.xml'
-filename = './Source/single_drug.xml'
 
-path = 'drug'
-incremental_loader = Loader.Loader.load(filename, path)
-search_dict = {"name": 'Action Pathway'}
+#set DB file
+#filename = './Source/minidrug2.xml'
+db_file = 'C:/Users/michal/PycharmProjects/mkr_drug_bank/Source/full database.xml'
+#filename = './Source/single_drug.xml'
+
+drug_xml_selector = 'drug'
+incremental_loader = Loader.Loader.load(db_file, drug_xml_selector)
+# search_dict = {"name": 'Action Pathway', "category" : "drug_action"}
 
 #
 # a = Parser.Drug.Drug(incremental_loader, search_dict)
@@ -22,12 +21,12 @@ search_dict = {"name": 'Action Pathway'}
 #     print(drug.general_represent)
 #     print(drug)
 
-b = Parser.AdvancedSearch.AdvancedSearch(incremental_loader, search_dict, search_type=Parser.AdvancedSearch.SupportedFile.PATHWAY)
+# b = Parser.AdvancedSearch.AdvancedSearch(incremental_loader, search_dict, search_type=Parser.AdvancedSearch.SupportedFile.PATHWAY)
+# #
+# print(b.result_dicts_list)
 #
-print(b.result_dicts_list)
-
-for elem in b.result_dicts_list:
-     drug = Model.Drug.Drug(elem)
-     print(drug.general_represent)
-     print(len(b.result_dicts_list))
-     #print(drug)
+# for elem in b.result_dicts_list:
+#      drug = Model.Drug.Drug(elem)
+#      print(drug.general_represent)
+#      print(len(b.result_dicts_list))
+#      #print(drug)
