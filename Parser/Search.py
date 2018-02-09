@@ -71,8 +71,10 @@ class Search:
                 if specific_node and (search_dict[key] in specific_node):
                     match = True
                 else:
+                    match = False
                     break
             else:
+                match = False
                 break
         return match
 
